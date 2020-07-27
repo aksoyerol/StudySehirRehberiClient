@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CityService } from 'src/services/city.service';
 import { ActivatedRoute } from '@angular/router';
 import { City } from 'src/models/city.model';
-import 'hammerjs';
-import {NgxGalleryOptions} from '@kolkov/ngx-gallery';
-import {NgxGalleryImage} from '@kolkov/ngx-gallery';
-import {NgxGalleryAnimation} from '@kolkov/ngx-gallery';
+import { NgxGalleryOptions } from '@kolkov/ngx-gallery';
+import { NgxGalleryImage } from '@kolkov/ngx-gallery';
+import { NgxGalleryAnimation } from '@kolkov/ngx-gallery';
 import { Photo } from 'src/models/photo.model';
 
 @Component({
@@ -16,7 +15,7 @@ import { Photo } from 'src/models/photo.model';
 })
 export class CityDetailComponent implements OnInit {
   city: City;
-  photos: Photo[];
+  photos: Photo[] = [];
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   constructor(private cityService: CityService, private activatedRoute: ActivatedRoute) { }
@@ -24,12 +23,14 @@ export class CityDetailComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.getCityById(params["cityId"]);
+
     });
   }
 
-  getCityById(cityId : number) {
+  getCityById(cityId: number) {
     return this.cityService.getCityById(cityId).subscribe(data => {
       this.city = data;
+      this.getPhotosByCityId(cityId);
     });
   }
 
@@ -42,22 +43,20 @@ export class CityDetailComponent implements OnInit {
 
   getImages() {
     const imageUrls = [];
-    for (let i = 1; i < this.photos.length; i++) {
+    for (let i = 0; i < this.city.photos.length; i++) {
       imageUrls.push({
-        small: this.photos[i].Url,
-        medium: this.photos[i].Url,
-        big: this.photos[i].Url
+        small: this.photos[i].url,
+        medium: this.photos[i].url,
+        big: this.photos[i].url
       });
     }
     return imageUrls;
   }
 
-
-
   setGallery() {
     this.galleryOptions = [
       {
-        width: '600px',
+        width: '100%',
         height: '400px',
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Slide
@@ -78,6 +77,28 @@ export class CityDetailComponent implements OnInit {
         preview: false
       }
     ];
+
+    // this.galleryImages = [
+    //   {
+    //     small: 'https://preview.ibb.co/jrsA6R/img12.jpg',
+    //     medium: 'https://preview.ibb.co/jrsA6R/img12.jpg',
+    //     big: 'https://preview.ibb.co/jrsA6R/img12.jpg'
+    //   },
+    //   {
+    //     small: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
+    //     medium: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
+    //     big: 'https://preview.ibb.co/kPE1D6/clouds.jpg'
+    //   },
+    //   {
+    //     small: 'https://preview.ibb.co/mwsA6R/img7.jpg',
+    //     medium: 'https://preview.ibb.co/mwsA6R/img7.jpg',
+    //     big: 'https://preview.ibb.co/mwsA6R/img7.jpg'
+    //   },{
+    //     small: 'https://preview.ibb.co/kZGsLm/img8.jpg',
+    //     medium: 'https://preview.ibb.co/kZGsLm/img8.jpg',
+    //     big: 'https://preview.ibb.co/kZGsLm/img8.jpg'
+    //   },      
+    // ];
 
     this.galleryImages = this.getImages();
   }

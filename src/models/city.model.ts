@@ -5,5 +5,5 @@ export class City {
     name: string;
     description: string;
     photoUrl: string;
-    Photos: Photo[];
+    photos: Photo[];
 }
