@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { City } from 'src/models/city.model';
+import { Photo } from 'src/models/photo.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +19,9 @@ export class CityService {
     return this.httpClient.get<City>(this.path + `/cities/${cityId}`)
   }
 
+  getPhotosByCityId(cityId: number): Observable<Photo[]> {
+    return this.httpClient.get<Photo[]>(this.path + "/cities/GetPhotosByCityId/" + cityId);
+  }
 
 
 }
