@@ -14,6 +14,10 @@ export class CityService {
     return this.httpClient.get<City[]>(this.path + "/cities");
   }
 
-  
+  getCityById(cityId: number): Observable<City> {
+    return this.httpClient.get<City>(this.path + `/cities/${cityId}`)
+  }
+
+
 
 }

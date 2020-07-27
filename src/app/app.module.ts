@@ -7,11 +7,15 @@ import { CityComponent } from './city/city.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 import { appRoutes } from "./routes";
+import { CityDetailComponent } from "./city/city-detail/city-detail.component";
+import { NgxGalleryModule } from 'ngx-gallery';
 @NgModule({
    declarations: [
       AppComponent,
       NavbarComponent,
-      CityComponent
+      CityComponent,
+      CityDetailComponent,
+      NgxGalleryModule
    ],
    imports: [
       BrowserModule,
