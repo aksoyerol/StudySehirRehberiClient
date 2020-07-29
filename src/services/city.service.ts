@@ -23,5 +23,11 @@ export class CityService {
     return this.httpClient.get<Photo[]>(this.path + "/cities/GetPhotosByCityId/" + cityId);
   }
 
+  insertCity(city: City): boolean {
+    if (this.httpClient.post(this.path + "/cities", city).subscribe() !== null) {
+      return true;
+    }
+    return false;
+  }
 
 }

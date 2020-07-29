@@ -56,15 +56,15 @@ export class CityDetailComponent implements OnInit {
   setGallery() {
     this.galleryOptions = [
       {
-        width: '100%',
-        height: '400px',
+        width: '150%',
+        height: '300px',
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Slide
       },
       // max-width 800
       {
         breakpoint: 800,
-        width: '100%',
+        width: '150%',
         height: '600px',
         imagePercent: 80,
         thumbnailsPercent: 20,

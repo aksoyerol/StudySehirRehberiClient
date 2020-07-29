@@ -1,0 +1,26 @@
+<main role="main" class="container">
+  <div class="row">
+    <div class="mt-3 pt-3">
+      <form [formGroup]="cityAddForm" (ngSubmit)="insert()">
+        <div class="form-group">
+          <label for="my-input">Name : </label>
+          <input id="name" class="form-control" type="text" formControlName="name"> 
+         
+          <span class="text-danger" *ngIf="cityAddForm.get('name').hasError('required') && cityAddForm.touched">
+            This area cannot be null !
+          </span>
+
+        </div>
+        <div class="form-group">
+          <label for="my-input">Description : </label>
+          <input id="description" class="form-control" type="text" formControlName="description">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="!cityAddForm.valid">Save</button>
+        <p>{{cityAddForm.value|json}}</p>
+        <p>{{cityAddForm.status|json}}</p>
+
+      </form>
+    </div>
+  </div>
+</main>
